@@ -1,6 +1,6 @@
 {
   "name": "@wyre-technology/clio-mcp",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "description": "MCP server for Clio Manage -- matters, contacts, activities, communications, tasks, documents, calendar entries, and bills",
   "type": "module",
   "main": "./dist/index.js",

@@ -1,0 +1,61 @@
+{
+  "name": "@wyre-technology/clio-mcp",
+  "version": "0.0.0",
+  "description": "MCP server for Clio Manage -- matters, contacts, activities, communications, tasks, documents, calendar entries, and bills",
+  "type": "module",
+  "main": "./dist/index.js",
+  "bin": {
+    "clio-mcp": "./dist/index.js"
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsup",
+    "prebuild": "npm run clean",
+    "clean": "rm -rf dist",
+    "dev": "tsup --watch",
+    "start": "node dist/index.js",
+    "start:http": "MCP_TRANSPORT=http node dist/index.js",
+    "lint": "tsc --noEmit",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:coverage": "vitest run --coverage"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wyre-technology/clio-mcp.git"
+  },
+  "keywords": [
+    "mcp",
+    "claude",
+    "clio",
+    "clio-manage",
+    "legal",
+    "psa",
+    "msp",
+    "model-context-protocol"
+  ],
+  "author": "Wyre Technology",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/wyre-technology/clio-mcp/issues"
+  },
+  "homepage": "https://github.com/wyre-technology/clio-mcp#readme",
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.29.0",
+    "@wyre-technology/node-clio": "^1.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.0",
+    "tsup": "^8.0.0",
+    "typescript": "^5.7.0",
+    "vitest": "^3.2.6"
+  },
+  "engines": {
+    "node": ">=20.0.0"
+  },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com"
+  }
+}

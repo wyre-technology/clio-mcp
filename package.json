@@ -47,7 +47,12 @@
     "@wyre-technology/node-clio": "^1.0.0"
   },
   "devDependencies": {
+    "@semantic-release/changelog": "^6.0.0",
+    "@semantic-release/git": "^10.0.0",
+    "@semantic-release/github": "^10.0.0",
+    "@semantic-release/npm": "^11.0.0",
     "@types/node": "^22.10.0",
+    "semantic-release": "^23.0.0",
     "tsup": "^8.0.0",
     "typescript": "^5.7.0",
     "vitest": "^3.2.6"

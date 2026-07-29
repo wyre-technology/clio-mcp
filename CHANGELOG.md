@@ -1,3 +1,10 @@
+## [1.0.1](https://github.com/wyre-technology/clio-mcp/compare/v1.0.0...v1.0.1) (2026-07-29)
+
+
+### Bug Fixes
+
+* **security:** eliminate cross-tenant server-ref race in gateway mode ([#2](https://github.com/wyre-technology/clio-mcp/issues/2)) ([1d99ad8](https://github.com/wyre-technology/clio-mcp/commit/1d99ad8de0a8b35f3259b1194101498e68451f18)), closes [#4](https://github.com/wyre-technology/clio-mcp/issues/4)
+
 # 1.0.0 (2026-07-15)
 
 

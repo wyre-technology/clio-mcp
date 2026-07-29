@@ -3,7 +3,6 @@ import { CallToolRequestSchema, ListToolsRequestSchema } from '@modelcontextprot
 import { getState, getNavigationTools, getBackTool, DOMAINS } from './domains/navigation.js';
 import { getDomainHandler } from './domains/index.js';
 import { getCredentials } from './utils/client.js';
-import { setServerRef } from './utils/server-ref.js';
 import { logger } from './utils/logger.js';
 import type { DomainName } from './utils/types.js';
 
@@ -24,7 +23,10 @@ export function createServer(): Server {
       },
     }
   );
-  setServerRef(server);
+  // Caller (index.ts / http.ts) is responsible for binding this server into
+  // the per-request async context via runWithServerRef/bindServerRef — see
+  // utils/server-ref.ts. Doing it here would set a module-level ref, the
+  // exact cross-tenant bug this file used to have.
 
   server.setRequestHandler(ListToolsRequestSchema, async (_request, extra) => {
     const sessionId = (extra as { sessionId?: string } | undefined)?.sessionId;

@@ -2,6 +2,7 @@ import { createServer as createHttpServer } from 'node:http';
 import { StreamableHTTPServerTransport } from '@modelcontextprotocol/sdk/server/streamableHttp.js';
 import { createServer } from './server.js';
 import { credentialsFromHeaders, getCredentials, runWithCredentials } from './utils/client.js';
+import { runWithServerRef } from './utils/server-ref.js';
 import { logger } from './utils/logger.js';
 
 /**
@@ -47,24 +48,34 @@ export function startHttpServer(): void {
 
     const handle = async () => {
       const server = createServer();
-      const transport = new StreamableHTTPServerTransport({
-        sessionIdGenerator: undefined,
-        enableJsonResponse: true,
-      });
-      res.on('close', () => {
-        transport.close();
-        server.close();
-      });
-      try {
-        await server.connect(transport);
-        await transport.handleRequest(req, res);
-      } catch (err) {
-        logger.error('MCP transport error', { error: (err as Error).message });
-        if (!res.headersSent) {
-          res.writeHead(500, { 'Content-Type': 'application/json' });
-          res.end(JSON.stringify({ jsonrpc: '2.0', error: { code: -32603, message: 'Internal error' }, id: null }));
+
+      // Bind this request's server into the per-request async context (not
+      // a module-level global) so elicitation helpers resolve *this*
+      // server/transport even after await gaps, and never a concurrent
+      // request's — see utils/server-ref.ts. The whole connect/handleRequest/
+      // catch chain must stay inside this callback so the bound context
+      // survives every await gap between here and any later getServerRef()
+      // call.
+      await runWithServerRef(server, async () => {
+        const transport = new StreamableHTTPServerTransport({
+          sessionIdGenerator: undefined,
+          enableJsonResponse: true,
+        });
+        res.on('close', () => {
+          transport.close();
+          server.close();
+        });
+        try {
+          await server.connect(transport);
+          await transport.handleRequest(req, res);
+        } catch (err) {
+          logger.error('MCP transport error', { error: (err as Error).message });
+          if (!res.headersSent) {
+            res.writeHead(500, { 'Content-Type': 'application/json' });
+            res.end(JSON.stringify({ jsonrpc: '2.0', error: { code: -32603, message: 'Internal error' }, id: null }));
+          }
         }
-      }
+      });
     };
 
     if (isGatewayMode) {

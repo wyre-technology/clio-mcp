@@ -1,6 +1,6 @@
 import { afterEach, describe, expect, it, vi } from 'vitest';
 import { elicitConfirmation, elicitSelection, elicitText, hasNoFilters } from '../utils/elicitation.js';
-import { setServerRef } from '../utils/server-ref.js';
+import { bindServerRef } from '../utils/server-ref.js';
 import type { Server } from '@modelcontextprotocol/sdk/server/index.js';
 
 function fakeServer(elicitInput: (...args: unknown[]) => unknown): Server {
@@ -9,50 +9,50 @@ function fakeServer(elicitInput: (...args: unknown[]) => unknown): Server {
 
 describe('elicitText / elicitSelection / elicitConfirmation', () => {
   afterEach(() => {
-    setServerRef(null as unknown as Server);
+    bindServerRef(null as unknown as Server);
   });
 
   it('returns null when no server is registered', async () => {
-    setServerRef(null as unknown as Server);
+    bindServerRef(null as unknown as Server);
     expect(await elicitText('prompt')).toBeNull();
     expect(await elicitSelection('prompt', ['a', 'b'])).toBeNull();
     expect(await elicitConfirmation('prompt')).toBeNull();
   });
 
   it('elicitText returns the accepted value', async () => {
-    setServerRef(fakeServer(async () => ({ action: 'accept', content: { value: 'hello' } })));
+    bindServerRef(fakeServer(async () => ({ action: 'accept', content: { value: 'hello' } })));
     expect(await elicitText('prompt')).toBe('hello');
   });
 
   it('elicitText returns null when declined', async () => {
-    setServerRef(fakeServer(async () => ({ action: 'decline' })));
+    bindServerRef(fakeServer(async () => ({ action: 'decline' })));
     expect(await elicitText('prompt')).toBeNull();
   });
 
   it('elicitText returns null when the transport throws', async () => {
-    setServerRef(fakeServer(async () => { throw new Error('client does not support elicitation'); }));
+    bindServerRef(fakeServer(async () => { throw new Error('client does not support elicitation'); }));
     expect(await elicitText('prompt')).toBeNull();
   });
 
   it('elicitSelection returns the chosen option', async () => {
-    setServerRef(fakeServer(async () => ({ action: 'accept', content: { choice: 'Person' } })));
+    bindServerRef(fakeServer(async () => ({ action: 'accept', content: { choice: 'Person' } })));
     expect(await elicitSelection('prompt', ['Person', 'Company'])).toBe('Person');
   });
 
   it('elicitSelection returns null for an empty options list without calling the server', async () => {
     const spy = vi.fn();
-    setServerRef(fakeServer(spy));
+    bindServerRef(fakeServer(spy));
     expect(await elicitSelection('prompt', [])).toBeNull();
     expect(spy).not.toHaveBeenCalled();
   });
 
   it('elicitConfirmation returns a boolean on accept', async () => {
-    setServerRef(fakeServer(async () => ({ action: 'accept', content: { confirm: true } })));
+    bindServerRef(fakeServer(async () => ({ action: 'accept', content: { confirm: true } })));
     expect(await elicitConfirmation('prompt')).toBe(true);
   });
 
   it('elicitConfirmation returns null on cancel', async () => {
-    setServerRef(fakeServer(async () => ({ action: 'cancel' })));
+    bindServerRef(fakeServer(async () => ({ action: 'cancel' })));
     expect(await elicitConfirmation('prompt')).toBeNull();
   });
 });

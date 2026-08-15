@@ -1,12 +1,11 @@
 FROM node:22-alpine AS builder
 WORKDIR /app
 
-ARG NODE_AUTH_TOKEN
-RUN echo "@wyre-technology:registry=https://npm.pkg.github.com" > .npmrc && \
-    echo "//npm.pkg.github.com/:_authToken=${NODE_AUTH_TOKEN}" >> .npmrc
-
 COPY package*.json ./
-RUN npm ci --ignore-scripts
+# GitHub Packages auth comes in as a BuildKit secret (the release workflow
+# passes --secret id=npmrc) so the token never lands in a layer or in image
+# metadata. Local builds: --secret id=npmrc,src=$HOME/.npmrc
+RUN --mount=type=secret,id=npmrc,target=/root/.npmrc npm ci --ignore-scripts
 COPY . .
 RUN npm run build
 RUN npm prune --omit=dev

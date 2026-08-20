@@ -43,7 +43,7 @@
   },
   "homepage": "https://github.com/wyre-technology/clio-mcp#readme",
   "dependencies": {
-    "@modelcontextprotocol/sdk": "^1.29.0",
+    "@modelcontextprotocol/sdk": "^1.30.0",
     "@wyre-technology/node-clio": "^1.0.0"
   },
   "devDependencies": {

@@ -1,4 +1,4 @@
-FROM node:22-alpine AS builder
+FROM node:26-alpine AS builder
 WORKDIR /app
 
 COPY package*.json ./
@@ -10,7 +10,7 @@ COPY . .
 RUN npm run build
 RUN npm prune --omit=dev
 
-FROM node:22-alpine
+FROM node:26-alpine
 WORKDIR /app
 ENV NODE_ENV=production AUTH_MODE=gateway MCP_HTTP_PORT=8080 MCP_TRANSPORT=http
 RUN addgroup -g 1001 -S mcp && adduser -u 1001 -S mcp -G mcp

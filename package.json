@@ -1,5 +1,5 @@
 {
-  "name": "@wyre-technology/clio-mcp",
+  "name": "@wyre-ai/clio-mcp",
   "version": "1.0.1",
   "description": "MCP server for Clio Manage -- matters, contacts, activities, communications, tasks, documents, calendar entries, and bills",
   "type": "module",
@@ -24,7 +24,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/wyre-technology/clio-mcp.git"
+    "url": "git+https://github.com/WYRE-AI/clio-mcp.git"
   },
   "keywords": [
     "mcp",
@@ -39,12 +39,12 @@
   "author": "Wyre Technology",
   "license": "Apache-2.0",
   "bugs": {
-    "url": "https://github.com/wyre-technology/clio-mcp/issues"
+    "url": "https://github.com/WYRE-AI/clio-mcp/issues"
   },
-  "homepage": "https://github.com/wyre-technology/clio-mcp#readme",
+  "homepage": "https://github.com/WYRE-AI/clio-mcp#readme",
   "dependencies": {
     "@modelcontextprotocol/sdk": "^1.30.0",
-    "@wyre-technology/node-clio": "^1.0.0"
+    "@wyre-ai/node-clio": "^1.0.0"
   },
   "devDependencies": {
     "@semantic-release/changelog": "^7.0.0",

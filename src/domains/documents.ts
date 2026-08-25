@@ -1,5 +1,5 @@
 import type { Tool } from '@modelcontextprotocol/sdk/types.js';
-import type { DocumentListParams } from '@wyre-technology/node-clio';
+import type { DocumentListParams } from '@wyre-ai/node-clio';
 import type { CallToolResult, DomainHandler } from '../utils/types.js';
 import { errorResult, jsonResult } from '../utils/types.js';
 import { getClient } from '../utils/client.js';

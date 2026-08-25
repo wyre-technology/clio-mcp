@@ -79,7 +79,7 @@ jobs:
       - name: Prepare npmrc build secret
         run: |
           {
-            echo "@wyre-technology:registry=https://npm.pkg.github.com"
+            echo "@wyre-ai:registry=https://npm.pkg.github.com"
             echo "//npm.pkg.github.com/:_authToken=${{ secrets.GITHUB_TOKEN }}"
             echo "always-auth=true"
           } > /tmp/.npmrc

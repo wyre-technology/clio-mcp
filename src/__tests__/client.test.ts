@@ -2,7 +2,7 @@ import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 
 const constructorCalls: Array<Record<string, unknown>> = [];
 
-vi.mock('@wyre-ai/node-clio', () => {
+vi.mock('@wyre-technology/node-clio', () => {
   class MockClioClient {
     config: Record<string, unknown>;
     constructor(config: Record<string, unknown>) {

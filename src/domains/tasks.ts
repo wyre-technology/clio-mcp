@@ -5,7 +5,7 @@ import type {
   TaskPriority,
   TaskStatus,
   TaskUpdateData,
-} from '@wyre-ai/node-clio';
+} from '@wyre-technology/node-clio';
 import type { CallToolResult, DomainHandler } from '../utils/types.js';
 import { errorResult, jsonResult } from '../utils/types.js';
 import { getClient } from '../utils/client.js';

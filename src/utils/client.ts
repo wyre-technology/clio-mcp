@@ -1,5 +1,5 @@
 import { AsyncLocalStorage } from 'node:async_hooks';
-import { ClioClient, type ClioRegion } from '@wyre-ai/node-clio';
+import { ClioClient, type ClioRegion } from '@wyre-technology/node-clio';
 import { logger } from './logger.js';
 
 export interface ClioCredentials {

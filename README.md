@@ -2,7 +2,7 @@
 
 MCP (Model Context Protocol) server for [Clio Manage](https://www.clio.com/) -- matters, contacts,
 activities, communications, tasks, documents, calendar entries, and bills. Built on
-[`@wyre-ai/node-clio`](https://github.com/WYRE-AI/node-clio).
+[`@wyre-technology/node-clio`](https://github.com/WYRE-AI/node-clio).
 
 > **Compliance note.** This server proxies access to attorney-client privileged data (matters,
 > communications, documents). It does not log or persist any request or response content anywhere --
@@ -19,7 +19,7 @@ npm install
 npm run build
 ```
 
-Requires Node.js >= 20. This package depends on `@wyre-ai/node-clio`, published to GitHub
+Requires Node.js >= 20. This package depends on `@wyre-technology/node-clio`, published to GitHub
 Packages -- see `.npmrc` (registry + token) if installing outside CI.
 
 ## Running
@@ -64,7 +64,7 @@ export CLIO_REGION=us           # optional, defaults to us
 Clio runs four separate regional deployments (`us`/`ca`/`eu`/`au`) -- a token minted for one region is
 not valid against another, and a Clio developer app registration is itself region-specific. Get an
 access token via the [Clio OAuth flow](https://docs.developers.clio.com/api-docs/clio-manage/authorization/)
-for the region you need; `@wyre-ai/node-clio` exports `buildAuthorizationUrl` /
+for the region you need; `@wyre-technology/node-clio` exports `buildAuthorizationUrl` /
 `exchangeAuthorizationCode` helpers for that.
 
 ## Tool navigation
@@ -206,7 +206,7 @@ bearing different tenants' tokens can never see each other's credentials.
 npm test
 ```
 
-Tests mock the `@wyre-ai/node-clio` client and the MCP server's `elicitInput` -- no live Clio
+Tests mock the `@wyre-technology/node-clio` client and the MCP server's `elicitInput` -- no live Clio
 credentials are needed. Coverage: every domain's tool-definition shape (valid `inputSchema`, correct
 `readOnlyHint` per read vs. mutate), credential header parsing and client cache invalidation, and
 handler routing/elicitation behavior for representative tools in each domain.

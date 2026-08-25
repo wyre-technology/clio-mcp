@@ -4,7 +4,7 @@
  *
  * clio-mcp's own credential resolution (credentialsFromHeaders in
  * src/utils/client.ts) is a pure header read -- no I/O. But the vendored
- * @wyre-ai/node-clio SDK's HttpClient has its own refresh-on-401
+ * @wyre-technology/node-clio SDK's HttpClient has its own refresh-on-401
  * behavior: HttpClient.handleResponse() sees a 401 from Clio's data API,
  * calls refreshAccessToken() -> OAuthTokenRefresher.refresh() -> postToken(),
  * a real outbound fetch to Clio's own OAuth token endpoint

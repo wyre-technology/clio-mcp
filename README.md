@@ -2,7 +2,7 @@
 
 MCP (Model Context Protocol) server for [Clio Manage](https://www.clio.com/) -- matters, contacts,
 activities, communications, tasks, documents, calendar entries, and bills. Built on
-[`@wyre-technology/node-clio`](https://github.com/wyre-technology/node-clio).
+[`@wyre-technology/node-clio`](https://github.com/WYRE-AI/node-clio).
 
 > **Compliance note.** This server proxies access to attorney-client privileged data (matters,
 > communications, documents). It does not log or persist any request or response content anywhere --

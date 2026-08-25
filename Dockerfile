@@ -17,7 +17,7 @@ RUN addgroup -g 1001 -S mcp && adduser -u 1001 -S mcp -G mcp
 COPY --from=builder /app/dist ./dist
 COPY --from=builder /app/node_modules ./node_modules
 COPY --from=builder /app/package.json ./
-LABEL org.opencontainers.image.source=https://github.com/wyre-technology/clio-mcp
+LABEL org.opencontainers.image.source=https://github.com/WYRE-AI/clio-mcp
 LABEL org.opencontainers.image.description="MCP server for Clio Manage -- matters, contacts, activities, communications, tasks, documents, calendar entries, and bills"
 LABEL org.opencontainers.image.licenses="Apache-2.0"
 USER mcp
